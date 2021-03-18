@@ -5,7 +5,7 @@ import { hash } from 'bcryptjs'
 import * as yup from 'yup'
 
 
-class UsersController{
+class UserController{
 
     async create(req: Req, res: Res){
 
@@ -58,4 +58,4 @@ class UsersController{
 }
 
 
-export { UsersController }
+export { UserController }
