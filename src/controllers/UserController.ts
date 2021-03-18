@@ -1,7 +1,7 @@
 import { Request as Req, Response as Res } from 'express'
 import { UsersRepository } from '../repositories/UsersRepository'
 import { getCustomRepository } from 'typeorm'
-import { hash } from 'bcryptjs'
+import { hashSync } from 'bcryptjs'
 import * as yup from 'yup'
 
 
@@ -37,7 +37,7 @@ class UserController{
             return res.status(400).json({ message: 'email already exists' })
 
 
-        const hashPassword = await hash(password, 8)
+        const hashPassword = hashSync(password, 8)
 
         interface User{
             username: string,
@@ -58,4 +58,4 @@ class UserController{
 }
 
 
-export { UserController }
+export default new UserController
