@@ -1,14 +1,14 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreatePermissionsRoles1616105275391 implements MigrationInterface {
+export class CreateUsersRoles1616177782818 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'permissions_roles',
+                name: 'users_roles',
                 columns: [
                     {
-                        name: 'permission_id',
+                        name: 'user_id',
                         type: 'uuid'
                     },
                     {
@@ -20,31 +20,29 @@ export class CreatePermissionsRoles1616105275391 implements MigrationInterface {
                 foreignKeys: [
 
                     {
-                        name: 'FKPermission',
-                        referencedTableName: 'permissions',
-                        referencedColumnNames: ['id'],
-                        columnNames: ['permission_id'],
-                        onDelete: 'CASCADE',
-                        onUpdate: 'SET NULL'
-                    },
-                    {
-                        name: 'FKRole',
+                        name: 'FKUser',
                         referencedTableName: 'roles',
                         referencedColumnNames: ['id'],
                         columnNames: ['role_id'],
                         onDelete: 'CASCADE',
                         onUpdate: 'SET NULL'
+                    },
+                    {
+                        name: 'FKRole',
+                        referencedTableName: 'users',
+                        referencedColumnNames: ['id'],
+                        columnNames: ['user_id'],
+                        onDelete: 'CASCADE',
+                        onUpdate: 'SET NULL'
                     }
 
                 ]
-
-
             })
         )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('permissions_roles')
+        await queryRunner.dropTable('users_roles')
     }
 
 }

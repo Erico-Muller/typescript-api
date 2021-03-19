@@ -5,9 +5,11 @@ import { getCustomRepository } from 'typeorm'
 
 class SendTemplateController{
 
-
+    async imTired(req: Req, res: Res){
+        return res.send('<h1>I\'m tired, I\'m stop developing today</h1>')
+    }
 
 }
 
 
-export { SendTemplateController }
+export default new SendTemplateController

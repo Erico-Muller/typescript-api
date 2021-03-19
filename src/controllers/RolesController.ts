@@ -18,7 +18,7 @@ class RolesController {
         const schema = yup.object().shape({
             name: yup.string().required(),
             description: yup.string().required(),
-            permission: yup.string().required()
+            permissions: yup.array().required()
         })
 
         try{
