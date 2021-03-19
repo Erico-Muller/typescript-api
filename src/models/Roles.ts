@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm'
+import { Entity, Column, PrimaryColumn, ManyToMany, JoinTable } from 'typeorm'
+import { Permissions } from './Permissions'
 import { v4 as uuid } from 'uuid'
 
 
@@ -13,6 +14,14 @@ class Roles {
 
     @Column()
     description: string
+
+    @ManyToMany(() => Permissions)
+    @JoinTable({
+        name: 'PermissionsRoles',
+        joinColumns: [{ name: 'role_id' }],
+        inverseJoinColumns: [{ name: 'permission_id' }]
+    })
+    permissions: Permissions[]
 
 
     constructor(){
