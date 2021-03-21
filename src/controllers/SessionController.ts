@@ -4,6 +4,7 @@ import { getCustomRepository } from 'typeorm'
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 import * as yup from 'yup'
+//import { session } from '../app'
 
 
 class SessionController {
@@ -37,11 +38,13 @@ class SessionController {
         if(!matchPassword)
             return res.status(400).json({ error: 'incorrect email or password' })
 
-
+            
         const token = sign({}, 'e8caa8d36922be22f32e083011c0efbc', {
             subject: user.id,
             expiresIn: '1d'
         })
+
+        req.session.state = true
 
         res.json({ token, user })
 

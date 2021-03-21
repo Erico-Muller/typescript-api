@@ -19,7 +19,8 @@ routes.post('/permission', is(['ADMIN']), permissionsController.create)
 routes.post('/role', is(['ADMIN']), rolesController.create)
 
 
-routes.get('/home', is(['USER', 'ADMIN']), sendTemplate.imTired)
+//PAGES
+routes.get('/home', sendTemplate.execute)
 
 
 export { routes }

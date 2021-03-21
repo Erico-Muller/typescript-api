@@ -1,12 +1,15 @@
 import { Request as Req, Response as Res } from 'express'
 import { UsersRepository } from '../repositories/UsersRepository'
 import { getCustomRepository } from 'typeorm'
+import { sendTemplate } from '../services/SendTemplate'
 
 
 class SendTemplateController{
 
-    async imTired(req: Req, res: Res){
-        return res.send('<h1>I\'m tired, I\'m stop developing today</h1>')
+    async execute(req: Req, res: Res){
+        
+        return sendTemplate('home', {}, res)
+
     }
 
 }
