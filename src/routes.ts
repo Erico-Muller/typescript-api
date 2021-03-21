@@ -9,17 +9,17 @@ import { is } from './middlewares/permission'
 const routes = Router()
 
 
-routes.get('/user', userController.readOne)
+routes.get('/user', is(['USER', 'ADMIN']), userController.readOne)
 routes.post('/user', userController.create)
 
-routes.post('/session', sessionController.create)
+routes.post('/session', is(['ADMIN']), sessionController.create)
 
-routes.post('/permission', permissionsController.create)
+routes.post('/permission', is(['ADMIN']), permissionsController.create)
 
-routes.post('/role', rolesController.create)
+routes.post('/role', is(['ADMIN']), rolesController.create)
 
 
-routes.get('/home', is(['USER']), sendTemplate.imTired)
+routes.get('/home', is(['USER', 'ADMIN']), sendTemplate.imTired)
 
 
 export { routes }
