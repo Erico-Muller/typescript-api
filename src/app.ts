@@ -12,7 +12,8 @@ const server = express()
 
 declare module 'express-session' {
     interface SessionData {
-        state: boolean
+        state?: boolean,
+        email?: string
     }
 }
 
@@ -21,7 +22,7 @@ server.use(session({
     resave: true,
     saveUninitialized: true
 }))
-server.use(express.static(join(__dirname, 'views')))
+server.use(express.static(join(__dirname, '..', 'public')))
 server.use(express.json())
 server.use(routes)
 server.use(annotate)

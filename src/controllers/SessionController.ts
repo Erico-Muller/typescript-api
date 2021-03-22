@@ -45,6 +45,7 @@ class SessionController {
         })
 
         req.session.state = true
+        req.session.email = email
 
         res.json({ token, user })
 
