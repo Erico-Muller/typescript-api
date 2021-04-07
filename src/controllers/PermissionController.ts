@@ -38,6 +38,33 @@ class PermissionController {
 
     }
 
+	async readOne(req: Req, res: Res){
+
+		const { name } = req.body
+
+        const permissionRepository = getCustomRepository(PermissionRepository)
+
+
+		const schema = yup.object().shape({
+			name: yup.string().require()
+		})
+
+		try{
+			await schema.validate(req.body, { abortEarly: true })
+		} catch(err) {
+			return res.status(400).json({ error: err })
+		}
+
+
+		const permission = await permissionRepository.findOne({ name })
+
+		if(!permission)
+			return res.status(404).json({ error: 'permission does not exists' })
+
+		return res.json(permission)
+
+	}
+
 }
 
 

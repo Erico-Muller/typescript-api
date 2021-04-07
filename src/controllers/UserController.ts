@@ -48,12 +48,12 @@ class UserController{
         if(emailExists)
             return res.status(400).json({ message: 'email already exists' })
 
-        const rolesExists = await rolesRepository.findByIds(roles)
+        const roles = await rolesRepository.findByIds(roles)
 
 
         const hashPassword = hashSync(password, 8)
 
-        const userData: User = { username, email, password: hashPassword, roles: rolesExists }
+        const userData: User = { username, email, password: hashPassword, roles }
 
         const user = userRepository.create(userData)
         await userRepository.save(user)
@@ -68,6 +68,8 @@ class UserController{
 
         const { email } = req.body
 
+        const userRepository = getCustomRepository(UsersRepository)
+
 
         const schema = yup.object().shape({
             email: yup.string().email().required()
@@ -79,8 +81,6 @@ class UserController{
             return res.status(400).json({ error: err })
         }
 
-
-        const userRepository = getCustomRepository(UsersRepository)
 
         const user = await userRepository.findOne({ email })
 

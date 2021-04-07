@@ -13,19 +13,13 @@ class SendTemplateController{
         const page = req.url.split('/')[1]
         console.log(req.body)
 
-        if(page == 'login' && req.session?.state === true){
+        if(page == 'login' && req.session?.state == true){
 
             const authHeader = req.headers.authorization || ''
-            const [ , token ] = authHeader?.split(' ')
+            const token = authHeader?.split(' ')[1]
             const payLoad = decode(token)
 
-            request({ url: 'http://localhost:4000/welcome', body: { id: payLoad?.sub, token: token } }, (err, res, body) => {
-
-                if(err) throw err
-
-                console.log(body)
-
-            })
+			//request
 
             return 'aaaa'
 

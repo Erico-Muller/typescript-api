@@ -15,8 +15,10 @@ routes.post('/api/user', userController.create)
 
 routes.post('/api/session', is(['USER', 'ADMIN']), sessionController.create)
 
+routes.get('/api/permission', permissionsController.readOne)
 routes.post('/api/permission', is(['ADMIN']), permissionsController.create)
 
+routes.get('/api/role', rolesController.readOne)
 routes.post('/api/role', is(['ADMIN']), rolesController.create)
 
 

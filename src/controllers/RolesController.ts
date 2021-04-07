@@ -43,6 +43,33 @@ class RolesController {
 
     }
 
+	async readOne(req: Req, res: Res){
+
+		const { name } = req.body
+
+        const rolesRepository = getCustomRepository(RolesRepository)
+
+
+		const schema = yup.object().shape({
+			name: yup.string().require()
+		})
+
+		try{
+			await schema.validate(req.body, { abortEarly: true })
+		} catch(err) {
+			return res.status(400).json({ error: err })
+		}
+
+
+		const role = await permissionRepository.findOne({ name })
+
+		if(!permission)
+			return res.status(404).json({ error: 'role does not exists' })
+
+		return res.json(permission)
+
+	}
+
 }
 
 
