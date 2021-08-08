@@ -1,3 +1,5 @@
 import { server } from './app'
 
-server.listen(4000, () => { console.log('listen at http://localhost:4000/') })
+const PORT: number = 4000
+
+server.listen(PORT, () => { console.log(`listen at http://localhost:${PORT}/`) })
